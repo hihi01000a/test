@@ -1,17 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>동그란 모서리 박스</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>영천이 사이트</title>
+    <style>
+        /* 전체 페이지의 기본 스타일 설정 */
+        body, html {
+            margin: 0; /* 여백 제거 */
+            padding: 0; /* 패딩 제거 */
+            width: 100%; /* 전체 너비 */
+            height: 100%; /* 전체 높이 */
+            overflow: hidden; /* 스크롤바 숨기기 */
+            background-color: black; /* 배경색을 검정으로 설정 */
+            display: flex; /* Flexbox 레이아웃 사용 */
+            justify-content: center; /* 수평 중앙 정렬 */
+            align-items: center; /* 수직 중앙 정렬 */
+            font-family: Arial, sans-serif; /* 기본 글꼴 설정 */
+        }
+        /* 이미지와 애니메이션을 감싸는 컨테이너 스타일 */
+        #container {
+            display: none; /* 처음에는 숨기기 */
+            width: 100%; /* 전체 너비 */
+            height: 100%; /* 전체 높이 */
+            position: relative; /* 상대 위치 설정 */
+        }
+        /* 이미지 스타일 설정 */
+        #image {
+            position: absolute; /* 절대 위치 설정 */
+            top: -100%; /* 처음에 화면 위에 배치 */
+            left: 50%; /* 수평 중앙 정렬 */
+            transform: translateX(-50%); /* 수평 중앙 정렬을 위한 보정 */
+            transition: top 1s ease-in-out; /* 애니메이션 설정 */
+        }
+        /* 컨테이너에 show 클래스가 추가되면 이미지 위치 변경 */
+        #container.show #image {
+            top: 50%; /* 화면 중앙으로 이동 */
+            transform: translate(-50%, -50%); /* 중앙 정렬 보정 */
+        }
+        /* 시작 메시지 스타일 */
+        .start-message {
+            color: white; /* 글자 색상 흰색 */
+            font-size: 24px; /* 글자 크기 */
+            cursor: pointer; /* 클릭할 수 있는 손가락 모양 커서 */
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="content">
-            <h1>Hello, Rounded Corner Box!</h1>
-            <p>This is a rounded corner box with pink background.</p>
-        </div>
+    <!-- 시작 메시지 -->
+    <div class="start-message" id="startMessage">클릭하여 시작</div>
+    <!-- 이미지를 감싸는 컨테이너 -->
+    <div id="container">
+        <img src="example.png" id="image" alt="Falling Image">
     </div>
+    <script>
+        // 시작 메시지에 클릭 이벤트 리스너 추가
+        document.getElementById('startMessage').addEventListener('click', function() {
+            // 시작 메시지를 숨기기
+            document.getElementById('startMessage').style.display = 'none';
+            // 이미지 컨테이너 보이기
+            var container = document.getElementById('container');
+            container.style.display = 'block';
+            // 애니메이션 시작을 위해 약간의 딜레이 후 show 클래스 추가
+            setTimeout(function() {
+                container.classList.add('show');
+            }, 100); // 컨테이너가 보이기 시작한 후 애니메이션을 시작
+        });
+    </script>
 </body>
 </html>
